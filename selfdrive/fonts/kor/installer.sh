@@ -52,9 +52,9 @@ if [ $update_font -eq "1" ] || [ $remove_old_font -eq "1" ]; then
     mount -o remount,rw /system
     if [ $update_font -eq "1" ]; then
         # install font
-        cp -rf /data/openpilot/installer/fonts/NanumGothic* /system/fonts/
+        cp -rf /data/openpilot/selfdrive/fonts/kor/NanumGothic* /system/fonts/
         # install font mapping
-        cp -rf /data/openpilot/installer/fonts/fonts.xml /system/etc/fonts.xml
+        cp -rf /data/openpilot/selfdrive/fonts/kor/fonts.xml /system/etc/fonts.xml
         # change permissions
         chmod 644 /system/etc/fonts.xml
         chmod 644 /system/fonts/NanumGothic*
