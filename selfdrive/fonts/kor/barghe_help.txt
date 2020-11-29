@@ -9,7 +9,12 @@
 2. /data/selfdrive/fonts/kor 로 이동
 3. installer.sh 파일 실행
 
-파일 실행 방법
+스크립트 파일 실행 방법
 아래 $ 제외한 ./installer.sh 를 그대로 실행
 
 $ ./installer.sh
+
+
+
+
+
