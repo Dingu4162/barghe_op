@@ -59,7 +59,7 @@ class CarInterface(CarInterfaceBase):
       ret.steerRatio = 12.5   #Spec14.4
       #tire_stiffness_factor = 0.385
       ret.lateralTuning.pid.kiBP, ret.lateralTuning.pid.kpBP = [[0.], [0.]]
-      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.13], [0.01]]
+      ret.lateralTuning.pid.kpV, ret.lateralTuning.pid.kiV = [[0.14], [0.01]]
       #ret.minSteerSpeed = -0 * CV.MPH_TO_MS
     elif candidate in [CAR.KIA_K7_HEV]:
       ret.lateralTuning.pid.kf = 0.00005
