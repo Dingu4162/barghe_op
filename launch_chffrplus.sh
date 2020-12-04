@@ -5,27 +5,6 @@ export NUMEXPR_NUM_THREADS=1
 export OPENBLAS_NUM_THREADS=1
 export VECLIB_MAXIMUM_THREADS=1
 
-if [ ! -f "/system/fonts/NanumGothic.ttf" ]; then
-
-    echo "Installing fonts..."
-
-    mount -o rw,remount /system
-
-    cp -rf /data/openpilot/selfdrive/fonts/kor/NanumGothic* /system/fonts/
-    cp -rf /data/openpilot/selfdrive/fonts/kor/fonts.xml /system/etc/fonts.xml
-    chmod 644 /system/etc/fonts.xml
-    chmod 644 /system/fonts/NanumGothic*
-
-    mount -o remount,r /system
-fi
-
-if [ "$(getprop persist.sys.language)" != "ko" ]; then
-    setprop persist.sys.locale ko_KR
-    setprop persist.sys.language ko
-    setprop persist.sys.country KR
-    setprop persist.sys.timezone Asia/Seoul
-fi
-
 if [ -z "$BASEDIR" ]; then
   BASEDIR="/data/openpilot"
 fi
