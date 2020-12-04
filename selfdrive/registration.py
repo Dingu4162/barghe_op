@@ -15,10 +15,9 @@ def register():
   params.put("Version", version)
   params.put("TermsVersion", terms_version)
   params.put("TrainingVersion", training_version)
-
-  params.put("GitCommit", get_git_commit(default=""))
-  params.put("GitBranch", get_git_branch(default=""))
-  params.put("GitRemote", get_git_remote(default=""))
+  params.put("GitCommit", get_git_commit())
+  params.put("GitBranch", get_git_branch())
+  params.put("GitRemote", get_git_remote())
   params.put("SubscriberInfo", get_subscriber_info())
 
   # create a key for auth
@@ -36,7 +35,7 @@ def register():
   os.chmod(PERSIST+'/comma/', 0o755)
   os.chmod(PERSIST+'/comma/id_rsa', 0o744)
 
-  dongle_id = params.get("DongleId", encoding='utf8')
+  dongle_id, access_token = params.get("DongleId", encoding='utf8'), params.get("AccessToken", encoding='utf8')
   public_key = open(PERSIST+"/comma/id_rsa.pub").read()
 
   # create registration token
@@ -52,14 +51,15 @@ def register():
     resp = api_get("v2/pilotauth/", method='POST', timeout=15,
                    imei=get_imei(0), imei2=get_imei(1), serial=get_serial(), public_key=public_key, register_token=register_token)
     dongleauth = json.loads(resp.text)
-    dongle_id = dongleauth["dongle_id"]
+    dongle_id, access_token = dongleauth["dongle_id"], dongleauth["access_token"]
 
     params.put("DongleId", dongle_id)
-    return dongle_id
+    params.put("AccessToken", access_token)
+    return dongle_id, access_token
   except Exception:
     cloudlog.exception("failed to authenticate")
-    if dongle_id is not None:
-      return dongle_id
+    if dongle_id is not None and access_token is not None:
+      return dongle_id, access_token
     else:
       return None
 
